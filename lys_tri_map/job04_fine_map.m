@@ -1,0 +1,79 @@
+%% Job 2: generate coarse maps
+
+% add mdx-lib to path
+addpath('~/Documents/GitHub/ando-lab/mdx-lib')
+
+useParallel = true; % run in parallel (requires more RAM and parallel computing toolbox)
+
+%%
+% *generate fine grids for reintegration*
+
+workingDir = fullfile('proc',...
+   {'7_1','8_1','8_2','8_3','9_1','9_2',...
+   '10_1','10_2','10_3','10_6','10_7'});
+
+opts = struct(...
+    'workingDirectory',workingDir,...
+    'matOut','grid.mat',...
+    'smax',Inf,...
+    'getSymmetryEquivalents',true,...
+    'ndiv',[13,11,11],...
+    'excludeBraggPosition',true); 
+
+for j=1:length(opts)
+    [tf,EM] = proc.Batch.grid(opts(j));
+end
+%%
+% *Re-integrate using fine grids*
+
+opts = struct(...
+    'workingDirectory',workingDir,...
+    'geometryIn','geom.mat',...
+    'bkgGeometryIn','geomBkg.mat',...
+    'gridIn','grid.mat',...
+    'scaleIn','scale.mat',...
+    'matOut','reintegrate.mat',...
+    'logOut','reintegrate.log',...
+    'minimumCounts',0,...
+    'minimumPixels',10,...
+    'parallel',useParallel);
+
+for j=1:length(opts)
+    [tf,EM] = proc.Batch.reintegrate(opts(j));
+end
+%%
+% *merge the result*
+
+% get crystal info
+load proc/unitCellInventory.mat Crystal
+
+M = proc.script.MergeScaledDiffuse(...
+    'Grid',grid.Sub3d('ndiv',[13,11,11]),...
+    'Crystal',Crystal,...
+    'nMin',2,...
+    'workingDirectory','proc');
+
+files = fullfile(...
+   {'7_1','8_1','8_2','8_3','9_1','9_2',...
+   '10_1','10_2','10_3','10_6','10_7'},'reintegrate.mat');
+
+fn = M.mapToColumns(files);
+
+[hklTable,isincl] = M.mergeColumns(fn);
+
+% split and merge for calculating cc1/2, cc*
+rng(0,'twister'); % for reproducibility
+[hklTable2] = M.mergeRandomHalfSets(fn,isincl);
+
+M.clearTmp(fn);
+
+% save table to mat file
+hklMerge = hklTable;
+save('proc/mergeFine.mat','hklMerge');
+clear hklMerge hklTable isincl M
+
+hklMerge = hklTable2;
+save('proc/mergeFineSplit.mat','hklMerge');
+
+clear hklMerge hklTable2
+
