@@ -1,8 +1,5 @@
 %% Job 2: generate coarse maps
 
-% add mdx-lib to path
-addpath('~/Documents/GitHub/ando-lab/mdx-lib')
-
 useParallel = true; % run in parallel (requires more RAM and parallel computing toolbox)
 
 %%
@@ -18,7 +15,7 @@ opts = struct(...
     'smax',Inf,...
     'getSymmetryEquivalents',true,...
     'ndiv',[13,11,11],...
-    'excludeBraggPosition',true); 
+    'excludeBraggPosition',true);
 
 for j=1:length(opts)
     [tf,EM] = proc.Batch.grid(opts(j));
@@ -76,4 +73,3 @@ hklMerge = hklTable2;
 save('proc/mergeFineSplit.mat','hklMerge');
 
 clear hklMerge hklTable2
-

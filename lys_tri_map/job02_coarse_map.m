@@ -1,8 +1,5 @@
 %% Job 2: generate coarse maps
 
-% add mdx-lib to path
-addpath('~/Documents/GitHub/ando-lab/mdx-lib')
-
 useParallel = true; % run in parallel (requires more RAM and parallel computing toolbox)
 
 %%
@@ -28,7 +25,7 @@ opts = struct(...
 % assign run options
 for j=1:length(opts)
     opts(j).run = {'filter','integrate','correct','export'};
-end 
+end
 
 [tf,EM] = proc.Batch.autorun(opts);
 

@@ -3,8 +3,6 @@
 mkdir proc
 mkdir export
 
-addpath('~/Documents/GitHub/ando-lab/mdx-lib/')
-
 %% get atomic model and structure factor from REFMAC output
 %
 % 1) load the REFMAC reflections file

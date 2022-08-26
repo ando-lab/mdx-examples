@@ -1,8 +1,5 @@
 %%
 
-% add mdx-lib to path
-addpath('~/Documents/GitHub/ando-lab/mdx-lib')
-
 %% Fetch diffraction images from SBGrid databank
 
 !rsync -av rsync://data.sbgrid.org/10.15785/SBGRID/747/ ./images/
@@ -44,7 +41,7 @@ backgroundTemplates = fullfile('images',...
         'lys_nitr_10_bkg_1_????.cbf',...
         'lys_nitr_10_bkg_1_????.cbf',...
         'lys_nitr_10_bkg_1_????.cbf'});
-    
+
 backgroundFrameRanges = {...
         [1,50],...
         [171,220],...
@@ -69,7 +66,7 @@ opts = struct(...
 % assign run options
 for j=1:length(opts)
     opts(j).run = {'xds2geom','cbf2geom'};
-end 
+end
 
 [tf,EM] = proc.Batch.autorun(opts);
 

@@ -1,8 +1,5 @@
 %%
 
-% add mdx-lib to path
-addpath('~/Documents/GitHub/ando-lab/mdx-lib')
-
 %% make directories
 
 mkdir proc
@@ -47,7 +44,7 @@ backgroundTemplates = fullfile('images',...
         'lys_rt_5_55_????.cbf',...
         'lys_rt_5_55_????.cbf',...
         'lys_rt_5_55_????.cbf'});
-    
+
 backgroundFrameRanges = {...
         [1,50],...
         [91,140],...
@@ -69,7 +66,7 @@ opts = struct(...
 % assign run options
 for j=1:length(opts)
     opts(j).run = {'xds2geom','cbf2geom'};
-end 
+end
 
 [tf,EM] = proc.Batch.autorun(opts);
 
