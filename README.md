@@ -6,6 +6,10 @@ The lysozyme examples reproduce the workflow described in [Meisburger, Case, & A
 
 ## Version history
 
+### Version 0.1
+
+Current development version, accompanies our [preprint on bioRxiv](<https://doi.org/10.1101/2022.08.22.504832>). Testing is under way.
+
 ## Repository Contents
 
 Each example consists of a series of MATLAB scripts (starting with job##) that are run in numerical order. A "setup" job downloads source data from the SBGrid databank, and all other input files are included in the repository (such as XDS input files, structure factor files, and atomic coordinate files).
@@ -19,16 +23,12 @@ In each example, the workflow is divided into two parts organized within subfold
 
 The dataset for lysozyme in the triclinic space group (P1) is described in [Meisburger, Case, & Ando, 2020] and in [Meisburger, Case, & Ando, 2022].  Diffraction images are in the SBGrid databank ([SBGrid 747]), and the structure has been deposited in the Protein Data Bank ([PDB 6o2h]).
 
-The final job generates a report summarizing the results. A copy is included here: [report_lys_tri_model.md](lys_tri_model/report/report_lys_tri_model.md)
-
 ### Example 2: Orthorhombic lysozyme
 
 - Part 1: [lys_ortho_map](lys_ortho_map)
 - Part 2: [lys_ortho_model](lys_ortho_model)
 
 The dataset for lysozyme in orthorhombic space group (P2~1~2~1~2~1~) is described in [Meisburger, Case, & Ando, 2022].  Diffraction images are in the SBGrid databank ([SBGrid 958]), and the structure has been deposited in the Protein Data Bank ([PDB 8dz7]).
-
-The final job generates a report summarizing the results. A copy is included here: [report_lys_ortho_model.md](lys_ortho_model/report/report_lys_ortho_model.md)
 
 ### Example 3: Tetragonal lysozyme
 
@@ -37,18 +37,48 @@ The final job generates a report summarizing the results. A copy is included her
 
 This dataset for lysozyme in tetragonal space group (P4~3~2~1~2) is described in [Meisburger, Case, & Ando, 2022].  Diffraction images are in the SBGrid databank ([SBGrid 957]), and the structure has been deposited in the Protein Data Bank ([PDB 8dyz]).
 
-The final job generates a report summarizing the results. A copy is included here: [report_lys_tet_model.md](lys_ortho_model/report/report_lys_tet_model.md)
-
 ## Requirements
 
-- MATLAB (<https://www.mathworks.com/>). Tested using version R2021a on Mac.
-- mdx-lib (<https://github.com/ando-lab/mdx-lib>). Tested using version
+### Software
 
+- Unix-like operating system (tested on Mac)
+- [MATLAB](https://www.mathworks.com) and the following toolboxes installed:
+  - Parallel Processing Toolbox is used, but can be disabled by setting `useParallel` to false in individual scripts
+  - Statistics and Machine Learning Toolbox
+- [mdx-lib](https://github.com/ando-lab/mdx-lib), **version 1.2**
 
+The examples have been tested using MATLAB version R2021a on Mac OS 10.14
+
+### Hardware
+
+The `_map` examples can make use of multi-core processing. The required RAM can be very large, especially when building the fine maps. The examples were tested on a desktop computer with 64 Gb of RAM and a 10-core CPU.
+
+The `_model` examples are less resource intensive, however sufficient RAM is needed for storing the diffuse maps.
 
 ## Instructions
 
+After downloading or cloning this repository, open MATLAB and navigate to the example directory (such as `lys_tri_map`). Then,
+
+1. Add mdx-lib directory to the MATLAB path
+
+2. Run the jobs in numerical order.
+
+Currently, the `_model` jobs require that you have run the corresponding `_map` job first, since the experimental maps are needed for modeling. If you want to skip the `_map` step, the processed maps can be downloaded from a public repository (_not yet: coming soon_).
+
+**Notes:**
+
+- In general, the job m-files should be inspected before they are run, in case there are variables that need to be modified (such as `useParallel`).
+- Additional information can be found in the m-file comments
+- Jobs can be run all at once, or step-wise using cell mode in the editor.
+- The workspace can be cleared between jobs. Information that needs to be carried over is saved in files, typically in the `proc` or `export` subdirectories.
+
 ## Expected Results
+
+The final modeling job generates a report summarizing the results. Reports are included here:
+
+- [report_lys_tri_model.md](lys_tri_model/report/report_lys_tri_model.md)
+- [report_lys_ortho_model.md](lys_ortho_model/report/report_lys_ortho_model.md)
+- [report_lys_tet_model.md](lys_tet_model/report/report_lys_tet_model.md)
 
 ## References
 
