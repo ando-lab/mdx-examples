@@ -8,7 +8,7 @@ The lysozyme examples reproduce the workflow described in [Meisburger, Case, & A
 
 ### Version 0.1
 
-Current development version, accompanies our [preprint on bioRxiv](<https://doi.org/10.1101/2022.08.22.504832>). Testing is under way.
+Current development version, accompanies our [preprint on bioRxiv](<https://doi.org/10.1101/2022.08.22.504832>).
 
 ## Repository Contents
 
@@ -51,9 +51,9 @@ The examples have been tested using MATLAB version R2021a on Mac OS 10.14
 
 ### Hardware
 
-The `_map` examples can make use of multi-core processing. The required RAM can be very large, especially when building the fine maps. The examples were tested on a desktop computer with 64 Gb of RAM and a 10-core CPU.
+The `_map` examples can make use of multi-core processing. The required RAM can be very large, especially when building the fine maps. The examples were tested on a desktop computer with 64 Gb of RAM and a 10-core CPU. On the test system, each map example required several hours to run.
 
-The `_model` examples are less resource intensive, however sufficient RAM is needed for storing the diffuse maps.
+The `_model` examples are less resource intensive, however sufficient RAM is needed for storing the diffuse maps. On the test system, each example required about 15 minutes.
 
 ## Instructions
 
