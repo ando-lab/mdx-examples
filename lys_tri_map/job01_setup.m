@@ -1,5 +1,11 @@
 %%
 
+%% make directories
+
+mkdir proc
+mkdir export
+mkdir images
+
 %% Fetch diffraction images from SBGrid databank
 
 !rsync -av rsync://data.sbgrid.org/10.15785/SBGRID/747/ ./images/
