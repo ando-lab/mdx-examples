@@ -6,6 +6,10 @@ The lysozyme examples reproduce the workflow described in [Meisburger, Case, & A
 
 ## Version history
 
+### Version 0.2
+
+Version to accompany the publication of our manuscript in Nature Communications.
+
 ### Version 0.1
 
 Current development version, accompanies our [preprint on bioRxiv](<https://doi.org/10.1101/2022.08.22.504832>).
