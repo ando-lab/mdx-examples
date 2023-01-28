@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/525488116.svg)](https://zenodo.org/badge/latestdoi/525488116)
+
 # `mdx-examples`
 
 Workflows for diffuse scattering data reduction and lattice disorder modeling with MATLAB and [mdx-lib](https://github.com/ando-lab/mdx-lib).
